@@ -1,0 +1,10 @@
+{
+  "name": "vulspiderX",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "dependencies": {
+    "nodemailer": "^6.1.0",
+    "puppeteer": "^1.14.0"
+  }
+}
