@@ -6,6 +6,11 @@
 
 本程序使用node.js开发，爬取功能使用Google puppeteer模块，动态解析javascript绕过网站反爬机制，定期获取hackerone最新公开漏洞(漏洞标题+url链接），并将最新公布的漏洞，发送邮件主动通知给若干个安全人员。
 
+### 实现效果
+
+![all](https://github.com/1135/notes/blob/master/imgs/vulspiderX.png?raw=true)
+
+
 ### 配置参数
 
 编辑`module_mail.js`设置发件箱信息
@@ -27,3 +32,7 @@ yarn
 # 运行 可选择保存程序日志
 node index.js > VulSpiderX.log
 ```
+
+### 相关项目
+
+* [1135/VulSpider: 本程序在后台持续运行，获取最新漏洞及每日简报，发送邮件给安全人员。](https://github.com/1135/VulSpider)
