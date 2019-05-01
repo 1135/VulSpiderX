@@ -23,15 +23,16 @@
 
 ### Usage
 
-请确保您已经安装了node.js及包管理器yarn
+>请确保您已经安装了node.js及包管理器yarn(本人使用的环境 Mac OS + node v10.15.3) 其他环境未实际测试
 
 ```
 #安装依赖库
-yarn
+yarn install
 
 # 运行 可选择保存程序日志
 node index.js > VulSpiderX.log
 ```
+
 
 ### 相关项目
 
