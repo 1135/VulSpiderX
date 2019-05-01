@@ -50,21 +50,21 @@ async function crawl() {
                 //let pos = 8000//当前页面高度 >= 该数值 则停止下翻 //如果设置为0则一直翻页 不停止
                 let timer = setInterval(() => {
                     let scrollTop1 = document.documentElement.scrollTop
-                    window.scrollBy(0, 400)
+                    window.scrollBy(0, 800)
                     let scrollTop2 = document.documentElement.scrollTop
                     console.log(scrollTop2)//输出当前页面高度
                     
                     //如果达到了预期高度 或 两次相等(即向下翻页面高度不变 也没有懒加载了)
                     //终止下翻
-                    //if (scrollTop2 >= pos || scrollTop1 == scrollTop2 ) {
+                    if (scrollTop2 >= 12000 || scrollTop1 == scrollTop2 ) {
 
                     //如果 两次相等(即向下翻页面高度不变 也没有懒加载了) 则 终止下翻
-                    if (scrollTop1 == scrollTop2 ) {
+                    //if (scrollTop1 == scrollTop2 ) {
                         clearInterval(timer)
                         resolve()
                     }
                 },
-                    500
+                    1000
                 )
             })
         }
