@@ -1,10 +1,6 @@
 # VulSpiderX
 
-本程序在后台持续运行，(每20分钟)通过headless chrome获取最新漏洞，如果对比后发现有新内容(漏洞标题+url链接），发送邮件主动通知给若干个安全人员。
-
-### 实现介绍
-
-本程序使用node.js开发，爬取功能使用Google puppeteer模块，动态解析javascript绕过网站反爬机制，定期获取hackerone最新公开漏洞(漏洞标题+url链接），并将最新公布的漏洞，发送邮件主动通知给若干个安全人员。
+本程序使用node.js开发，在后台持续运行，爬取功能使用了Google puppeteer模块，通过操作headless chromium(动态解析javascript绕过网站反爬机制)，定期获取hackerone页面信息，如果对比后发现有最新漏洞信息(漏洞标题+url链接），发送邮件主动通知给若干个安全人员。
 
 ### 实现效果
 
@@ -23,7 +19,8 @@
 
 ### Usage
 
->请确保您已经安装了node.js及包管理器yarn(本人使用的环境 Mac OS + node v10.15.3) 其他环境未实际测试
+>请确保您已经安装了node.js及包管理器yarn(本人使用的环境 Mac OS + node v10.15.3)
+>其他环境暂未实际测试
 
 ```
 #安装依赖库
