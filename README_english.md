@@ -6,14 +6,10 @@ It runs in the background and gets the latest information on Hackerone every 10 
 
 The crawl function uses Google puppeteer module to manipulate headless chromium to dynamically parse javascript bypass the anti-crawl mechanism.
 
-* Features
-  * technical fundamentals : Google puppeteer
-  * bypass anti-crawl : simulates manual and adds some randomness
-  * non-interference : recipient A cannot see the address of recipient B
-
 ### Screenshots
 
 ![all](https://github.com/1135/notes/blob/master/imgs/vulspiderX.png?raw=true)
+Recipient privacy security (any recipient cannot get the email addresses of other recipients)
 
 ### Configuration
 
