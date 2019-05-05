@@ -4,17 +4,13 @@
 
 本程序在后台运行，每10到20分钟(随机)获取Hackerone的最新信息，如果有最新的漏洞，主动发送电子邮件(标题+链接)给若干个安全研究人员。
 
-本程序使用node.js开发，爬取功能使用了Google puppeteer模块来操作headless chromium，从而实现动态解析javascript，以绕过反爬机制。
-
-* 特点
-  * 技术基础 - Google puppeteer
-  * 绕过反爬 - 模拟人工 且加入了一定的随机性
-  * 互不干扰 - 收件人A看不到收件人B的地址
+本程序使用node.js开发，爬取功能使用了Google puppeteer模块来模拟人工操作headless chromium，同时动态解析javascript，以绕过反爬机制。
 
 ### 实现效果
 
 ![all](https://github.com/1135/notes/blob/master/imgs/vulspiderX.png?raw=true)
 
+收件人隐私安全(任一收件人无法得到其他收件人的邮箱地址)
 
 ### 配置参数
 
