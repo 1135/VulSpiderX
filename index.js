@@ -1,7 +1,7 @@
 const module_array = require('./module_array');
 const module_mail = require('./module_mail');
 const module_pu_hackerone = require('./module_pu_hackerone');
-
+const moudule_random = require('./module_random')
 
 var oldarray = [];
 var res = [];
@@ -30,15 +30,19 @@ function print_current_time() {
 
 //发送邮件 逐条发送
 async function sendmail(arr) {
+    console.log("-----[mail]sending")
 
-    for (var [key, value] of arr) {
-        console.log("-----sending")
-        console.log(key);
-        console.log(value);
-        await module_mail.send(key, value);// 漏洞标题 漏洞url
-        await sleep(10 * 1000);//等待10秒 意思是10秒发一封邮件 避免ban
-        console.log("-----done")
+    arr.reverse();//数组逆序 以便发送后邮件显示顺序为由新到旧 第一条最新
+
+    for (var index = 0; index < arr.length; index++) {
+
+        let one_title = arr[index][0];
+        let one_url = arr[index][1];
+        await module_mail.send(one_title, one_url);// 漏洞标题 漏洞url
+        await sleep(20 * 1000);//20秒后继续发送下一封邮件 避免ban
     }
+
+    console.log("-----[mail]done")
 }
 
 
@@ -59,22 +63,15 @@ async function mainlogic() {
 
     //爬取 计时结束
     console.log(`[crawl] Time elapsed ${Math.round((new Date().getTime() - startDate) / 1000)} s`);
-
     console.log(res)
     if (res != null) {//res不为空
         console.log('items count: ', res.length);
-
         if (crawl_count == 1) {//首次爬取
-            //console.log("first")
             sendmail(res);
-
             oldarray = res.concat()//深拷贝 数组
-
         }
         else {
-            console.log('#1res:')
-            console.log(res)
-            diffarray = module_array.getdifference(res.concat(), oldarray)
+            diffarray = module_array.getdifference(res.concat(), oldarray)//求差集
 
             if (diffarray.length > 0) {//如果有新增内容
                 console.log('diff:', diffarray);//比上次新增的内容
@@ -84,15 +81,9 @@ async function mainlogic() {
             else {//没有新增内容
                 console.log("diff: 0")
             }
-
         }
-
-
     }
-
-
     console.log('-----------------------------------');
-
 }
 
 
@@ -101,8 +92,9 @@ async function app() {
     while (1) {
         await mainlogic();
         print_current_time()
-        console.log("waiting...")
-        await sleep(20 * 60 * 1000);//等待20分钟 然后继续爬
+        let wait_time = moudule_random.randomIntInc(10, 20) * 60 * 1000;
+        console.log("Wait " + wait_time / (60 * 1000) + " minutes for the next crawl.");
+        await sleep(wait_time);//每两次爬取之间的时间间隔为10-20分钟
     }
 
 }
