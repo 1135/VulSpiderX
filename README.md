@@ -1,6 +1,10 @@
 # VulSpiderX
 
-本程序使用node.js开发，在后台持续运行，爬取功能使用了Google puppeteer模块，通过操作headless chromium(动态解析javascript绕过网站反爬机制)，定期获取hackerone页面信息，如果对比后发现有最新漏洞信息(漏洞标题+url链接），发送邮件主动通知给若干个安全人员。
+本程序使用node.js开发，在后台持续运行，爬取功能使用了Google puppeteer模块，通过操作headless chromium(动态解析javascript绕过网站反爬机制)，每10-20分钟(随机)获取一次hackerone页面信息，如果对比发现存在最新漏洞信息(漏洞标题+url链接），发送邮件主动通知给若干个安全人员。
+
+* 技术基础 - Google puppeteer
+* 绕过反爬 - 模拟人工 且加入了一定的随机性
+* 互不干扰 - 收件人A看不到收件人B的地址
 
 ### 实现效果
 
@@ -29,7 +33,6 @@ yarn install
 # 运行 可选择保存程序日志
 node index.js > VulSpiderX.log
 ```
-
 
 ### 相关项目
 
