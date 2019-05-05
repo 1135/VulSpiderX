@@ -2,9 +2,6 @@ const puppeteer = require('puppeteer');
 
 async function crawl() {
 
-    const puppeteer = require('puppeteer');
-
-
     //运行浏览器
     const browser = await
         puppeteer.launch({
@@ -21,7 +18,6 @@ async function crawl() {
                 //'--proxy-server=127.0.0.1:8080'
             ],
         });
-
 
     let url = 'https://hackerone.com/hacktivity?order_direction=DESC&order_field=latest_disclosable_activity_at&filter=type%3Aall';
 
@@ -41,30 +37,35 @@ async function crawl() {
             );
 
         await page.waitFor('input[name=search]');
-       
-
 
         //向下滚动
         await page.evaluate(() => {
             return new Promise((resolve, reject) => {
-                //let pos = 8000//当前页面高度 >= 该数值 则停止下翻 //如果设置为0则一直翻页 不停止
+
+                //随机数函数
+                function randomIntInc(low, high) {
+                    return Math.floor(Math.random() * (high - low + 1) + low)
+                }
+
                 let timer = setInterval(() => {
                     let scrollTop1 = document.documentElement.scrollTop
-                    window.scrollBy(0, 800)
+                    window.scrollBy(0, randomIntInc(300, 500))//向下滚动数值
+
                     let scrollTop2 = document.documentElement.scrollTop
                     console.log(scrollTop2)//输出当前页面高度
-                    
-                    //如果达到了预期高度 或 两次相等(即向下翻页面高度不变 也没有懒加载了)
-                    //终止下翻
-                    if (scrollTop2 >= 12000 || scrollTop1 == scrollTop2 ) {
 
-                    //如果 两次相等(即向下翻页面高度不变 也没有懒加载了) 则 终止下翻
-                    //if (scrollTop1 == scrollTop2 ) {
+                    //如果满足以下二者之一 则终止向下翻页：
+                    // 1.当前页面高度 >= 预期数值
+                    // 2.两次翻页 但当前页面高度数值不变 (即向下翻页面高度不变 也没有懒加载了)
+                    if (scrollTop2 >= 10000 || scrollTop1 == scrollTop2) {
+
+                        //如果 两次相等(即向下翻页面高度不变 也没有懒加载了) 则 终止下翻
+                        //if (scrollTop1 == scrollTop2 ) {
                         clearInterval(timer)
                         resolve()
                     }
                 },
-                    1000
+                    randomIntInc(800, 1700)//每两次向下滚动的时间间隔 毫秒
                 )
             })
         }
@@ -109,14 +110,10 @@ async function crawl() {
             for (let i = 0; i <= eleCount - 1; i++) {
 
                 tempArray1[i] = [element[i].innerText, element[i].href]
-                //htmlArray1[i] = element[i].innerText+'\n'+element[i].href;//取出某个元素 的innerText
 
             }
             return tempArray1
         }, 'div.spec-hacktivity-content>a', eleCount);
-
-        //console.log(result)
-
     }
 
     await browser.close();
