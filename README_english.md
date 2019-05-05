@@ -6,9 +6,10 @@ It runs in the background and gets the latest information on Hackerone every 10 
 
 The crawl function uses Google puppeteer module to manipulate headless chromium to dynamically parse javascript bypass the anti-crawl mechanism.
 
-* technical fundamentals : Google puppeteer
-* bypass anti-crawl : simulates manual and adds some randomness
-* non-interference : recipient A cannot see the address of recipient B
+* Features
+  * technical fundamentals : Google puppeteer
+  * bypass anti-crawl : simulates manual and adds some randomness
+  * non-interference : recipient A cannot see the address of recipient B
 
 ### Screenshots
 
@@ -16,14 +17,15 @@ The crawl function uses Google puppeteer module to manipulate headless chromium 
 
 ### Configuration
 
-Edit `module_mail.js` to set the mail sender information
-* `host:`  E-mail host address
-* `user =` E-mail account
-* `pass =` E-mail password
+Edit `module_mail.js`
 
+* Configure the mail sender information
+  * `host:`  E-mail host address
+  * `user =` E-mail account
+  * `pass =` E-mail password
 
-Configure recipient address
-* `recipients =` recipient address
+* Configure recipient address
+  * `recipients =` recipient address
 
 ### Usage
 
