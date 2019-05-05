@@ -1,5 +1,7 @@
 # VulSpiderX
 
+[english](README_english.md) | [中文文档](README.md)
+
 本程序使用node.js开发，在后台持续运行，爬取功能使用了Google puppeteer模块，通过操作headless chromium(动态解析javascript绕过网站反爬机制)，每10-20分钟(随机)获取一次hackerone页面信息，如果对比发现存在最新漏洞信息(漏洞标题+url链接），发送邮件主动通知给若干个安全人员。
 
 * 技术基础 - Google puppeteer
@@ -21,7 +23,7 @@
 配置收件箱地址
 * 收件人邮箱地址列表：将代码中`recipients =`的值改为收件人邮箱地址列表。
 
-### Usage
+### 使用方法
 
 >请确保您已经安装了node.js及包管理器yarn(本人使用的环境 Mac OS + node v10.15.3)
 >其他环境暂未实际测试
