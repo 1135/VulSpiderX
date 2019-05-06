@@ -12,10 +12,15 @@ async function crawl() {
             ignoreHTTPSErrors: true, //忽略https错误
 
             args: [
+                // browser proxy
+                //'--proxy-server=127.0.0.1:8080',
+
                 //设置整个浏览器的user-agent为 win10+chrome
                 '--user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.113 Safari/537.36',
-                // browser proxy
-                //'--proxy-server=127.0.0.1:8080'
+                
+                //关闭沙箱 以便于linux和windows下chromium的正常运行 (MacOS可以注释掉以下两行)
+                '--no-sandbox', 
+                '--disable-setuid-sandbox',
             ],
         });
 
