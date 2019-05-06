@@ -67,7 +67,8 @@ async function mainlogic() {
     if (res != null) {//res不为空
         console.log('items count: ', res.length);
         if (crawl_count == 1) {//首次爬取
-            sendmail(res);
+            //sendmail(res);//首次爬取 不建议发送邮件
+            sendmail([["VulSpider","Successful installation.\nrunning..."]]);//发送一封邮件 提示"程序运行中"
             oldarray = res.concat()//深拷贝 数组
         }
         else {

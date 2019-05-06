@@ -1,17 +1,16 @@
 var nodemailer = require('nodemailer');
 
-var user = 'xxxx@qq.com';//发件 账号
+var user = 'xxxx@aliyun.com';//发件 账号
 var pass = 'xxxx';//发件 密码
 var recipients = "1@sohu.com, 2@126.com";//收件地址 列表
 
 function send(sub, content) {
 
     var transporter = nodemailer.createTransport({
-        //https://github.com/andris9/nodemailer-wellknown#supported-services 支持列表
-        //service: 'qq',
-        host: "smtp.qq.com",
-        port: 25, // SMTP 端口
-        //secureConnection: true, // 使用 SSL
+        host: "smtp.aliyun.com",
+        //port: 25, // SMTP
+        port: 465, // SMTPS（SMTP-over-SSL）
+        secureConnection: true, // SSL
         auth: {
             user: user,
             pass: pass,
