@@ -26,16 +26,19 @@
 
 ### 使用方法
 
->请确保您已经安装了node.js及包管理器yarn(本人使用的环境 Mac OS + node v10.15.3)
->其他环境暂未实际测试
-
+请确保您已经安装了 node.js 和 包管理器yarn
 ```
-#安装依赖库
+# 自动安装本程序的依赖库
 yarn install
 
 # 运行 可选择保存程序日志
 node index.js > VulSpiderX.log
 ```
+
+* 安装环境测试
+  * 环境1: macOS 10.14.4 + node v10.15.3 亲测通过 ✅
+  * 环境2: CentOS 7 + node 亲测通过 ✅ 如果报错请安装你缺少的chromium的依赖库即可 如`yum install libXScrnSaver*`
+  * 其他: 暂未测试
 
 ### 相关项目
 
