@@ -35,9 +35,9 @@ yarn install
 node index.js > VulSpiderX.log
 ```
 
-* 安装环境测试
+* 运行环境
   * 环境1: macOS 10.14.4 + node v10.15.3 亲测通过 ✅
-  * 环境2: CentOS 7 + node 亲测通过 ✅ 如果报错请安装你缺少的chromium的依赖库即可 如`yum install libXScrnSaver*`
+  * 环境2: CentOS 7 + node 亲测通过 ✅ 如果报错请安装你缺少的chromium的依赖库即可 如`yum install libXScrnSaver*` 更多参考[puppeteer/troubleshooting.md](https://github.com/GoogleChrome/puppeteer/blob/master/docs/troubleshooting.md#running-puppeteer-on-google-cloud-functions)
   * 其他: 暂未测试
 
 ### 相关项目
