@@ -17,7 +17,9 @@
 编辑`module_mail.js`进行配置
 
 * 配置发件人信息
-  * `host:`  邮箱服务商地址
+  * `host: `  邮箱服务地址
+  * `port: `  邮件服务端口 建议使用SMTP-over-SSL协议(通常为465端口) 不建议使用SMTP协议(通常为25端口)
+  * `secureConnection: ` SMTP-over-SSL协议则设置为true 否则为false
   * `user =` 邮箱账号
   * `pass =` 邮箱密码
 
