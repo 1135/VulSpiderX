@@ -75,9 +75,18 @@ async function mainlogic() {
             diffarray = module_array.getdifference(res.concat(), oldarray)//求差集
 
             if (diffarray.length > 0) {//如果有新增内容
-                console.log('diff:', diffarray);//比上次新增的内容
-                sendmail(diffarray);
+                console.log('diff:', diffarray);//新增的数量
+
+                console.log("\nall:")
+                console.log(res)
+                if (diffarray.length < 9){
+                    sendmail(diffarray);
+                }
+                else{
+                    console.log('skip')
+                }
                 oldarray = res.concat()//深拷贝 数组
+
             }
             else {//没有新增内容
                 console.log("diff: 0")
