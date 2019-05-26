@@ -59,13 +59,11 @@ async function crawl() {
                     let scrollTop2 = document.documentElement.scrollTop
                     console.log(scrollTop2)//输出当前页面高度
 
+                    
                     //如果满足以下二者之一 则终止向下翻页：
                     // 1.当前页面高度 >= 预期数值
-                    // 2.两次翻页 但当前页面高度数值不变 (即向下翻页面高度不变 也没有懒加载了)
-                    if (scrollTop2 >= 10000 || scrollTop1 == scrollTop2) {
-
-                        //如果 两次相等(即向下翻页面高度不变 也没有懒加载了) 则 终止下翻
-                        //if (scrollTop1 == scrollTop2 ) {
+                    // 2.两次相等 (即向下翻页面高度不变 没有懒加载了)
+                    if (scrollTop2 >= 30000 || scrollTop1 == scrollTop2) {
                         clearInterval(timer)
                         resolve()
                     }
