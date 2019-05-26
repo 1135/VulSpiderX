@@ -67,8 +67,14 @@ async function mainlogic() {
     if (res != null) {//res不为空
         console.log('items count: ', res.length);
         if (crawl_count == 1) {//首次爬取
-            //sendmail(res);//首次爬取 不建议发送邮件
-            sendmail([["VulSpider","Successful installation.\nrunning..."]]);//发送一封邮件 提示"程序运行中"
+            console.log(res)
+            var result = "The program runs successfully.\nHere are the results of the first crawl.\nThe email address will receive the latest information in the future.\n\n-----\n\n";
+            for (var index = 0; index < res.length; index++) {
+                let one_title = res[index][0];
+                let one_url = res[index][1];
+                result += one_title + "\n" + one_url + "\n\n"
+            }
+            sendmail([["Running...", result]]);
             oldarray = res.concat()//深拷贝 数组
         }
         else {
