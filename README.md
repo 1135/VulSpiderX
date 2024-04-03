@@ -2,9 +2,11 @@
 
 [english](README_english.md) | [中文文档](README.md)
 
-本程序在后台运行，每10到20分钟(随机)获取Hackerone的最新信息，如果有最新的漏洞，主动发送电子邮件(标题+链接)给若干个安全研究人员。
+功能说明: 本程序在后台运行，每10到20分钟(随机)获取Hackerone的最新信息，如果有最新的漏洞，主动发送电子邮件(标题+链接)给若干个安全研究人员。
 
-本程序使用node.js开发，爬取功能使用了Google puppeteer模块来模拟人工操作headless chromium，同时动态解析javascript，以绕过反爬机制。
+技术说明: 本程序使用node.js开发，爬取功能使用了Google puppeteer模块来模拟人工操作headless chromium，同时动态解析javascript，以绕过反爬机制。
+
+>其他说明: 本程序写于2019.4 多年持续可用. 但由于最近(2024.4)Hackerone官网前端页面发生变更, 需修改相关提取数据的代码, 已开发测试完成, 待有空更新到这个公开仓库.
 
 ### 实现效果
 
@@ -29,7 +31,7 @@
 ### 使用方法
 
 请确保您已经安装了 node.js 和 包管理器yarn
-```
+```shell
 # 自动安装本程序的依赖库
 yarn install
 
