@@ -6,7 +6,6 @@
 
 技术说明: 本程序使用node.js开发，爬取功能使用了Google puppeteer模块来模拟人工操作headless chromium，同时动态解析javascript，以绕过反爬机制。
 
->其他说明: 本程序写于2019.4 多年持续可用. 但由于最近(2024.4)Hackerone官网前端页面发生变更, 需修改相关提取数据的代码, 已开发测试完成, 待有空更新到这个公开仓库.
 
 ### 实现效果
 
@@ -43,6 +42,13 @@ node index.js > VulSpiderX.log
   * 环境1: macOS 10.14.4 + node v10.15.3 亲测通过 ✅
   * 环境2: CentOS 7 + node v11.0.0 亲测通过 ✅ 如果报错请安装你缺少的chromium的依赖库即可 如`yum install libXScrnSaver*` 更多参考[puppeteer/troubleshooting.md](https://github.com/GoogleChrome/puppeteer/blob/master/docs/troubleshooting.md#running-puppeteer-on-google-cloud-functions)
   * 其他: 暂未测试
+
+### 更新日志
+
+2019.4 开发完成.  2019-2024.2持续可用.
+
+2024.4 更新完成.  Hackerone官网前端页面发生变更, 已修改相关提取数据的代码, 已更新到这个公开仓库.
+
 
 ### 相关项目
 

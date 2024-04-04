@@ -4,7 +4,7 @@ const module_pu_hackerone = require('./module_pu_hackerone');
 const moudule_random = require('./module_random')
 
 var oldarray = [];
-var res = [];
+var result_array = [];
 var diffarray = [];
 var crawl_count = 0;
 
@@ -24,6 +24,7 @@ function print_current_time() {
     var minute = date.getMinutes();
     var second = date.getSeconds();
     console.log(year + '.' + month + '.' + day + ' ' + hour + ':' + minute + ':' + second);
+
 }
 
 
@@ -37,8 +38,8 @@ async function sendmail(arr) {
     for (var index = 0; index < arr.length; index++) {
 
         let one_title = arr[index][0];
-        let one_url = arr[index][1];
-        await module_mail.send(one_title, one_url);// 漏洞标题 漏洞url
+        let one_content = arr[index][1];
+        await module_mail.send_a_mail(one_title, one_content);// 漏洞标题 漏洞url
         await sleep(20 * 1000);//20秒后继续发送下一封邮件 避免ban
     }
 
@@ -59,47 +60,72 @@ async function mainlogic() {
 
     console.log(`[crawl]times: ${crawl_count}`);//爬取次数
 
-    res = await module_pu_hackerone.crawl();
+    result_array = await module_pu_hackerone.crawl();
 
     //爬取 计时结束
     console.log(`[crawl] Time elapsed ${Math.round((new Date().getTime() - startDate) / 1000)} s`);
-    console.log(res)
-    if (res != null) {//res不为空
-        console.log('items count: ', res.length);
+
+    //console.log(result_array)
+    if (result_array != null) {//res不为空
+        console.log('items count: ', result_array.length);
+        //console.log(`\n[crawl]data: ${res}`);//本次爬取的数据
+
+
         if (crawl_count == 1) {//首次爬取
-            console.log(res)
+            // console.log("first")
+            console.log(result_array)
+
+            //逐条发送 可能因为一次性发送多封邮件被ban
+            //sendmail(res);
+
             var result = "The program runs successfully.\nHere are the results of the first crawl.\nThe email address will receive the latest information in the future.\n\n-----\n\n";
-            for (var index = 0; index < res.length; index++) {
-                let one_title = res[index][0];
-                let one_url = res[index][1];
-                result += one_title + "\n" + one_url + "\n\n"
+
+            for (var index = 0; index < result_array.length; index++) {
+                let one_title = result_array[index][0];
+                let one_content = result_array[index][1];
+                result += one_title + "\n" + one_content + "\n\n========\n\n" // 换行
             }
+
+
+
             sendmail([["Running...", result]]);
-            oldarray = res.concat()//深拷贝 数组
+
+            oldarray = result_array.concat()//深拷贝 数组
+
         }
         else {
-            diffarray = module_array.getdifference(res.concat(), oldarray)//求差集
+
+            //求差集
+            //result_array  - oldarray
+            diffarray = module_array.getdifference(result_array.concat(), oldarray)
 
             if (diffarray.length > 0) {//如果有新增内容
                 console.log('diff:', diffarray);//新增的数量
 
                 console.log("\nall:")
-                console.log(res)
+                console.log(result_array)
                 if (diffarray.length < 9){
                     sendmail(diffarray);
                 }
                 else{
                     console.log('skip')
                 }
-                oldarray = res.concat()//深拷贝 数组
+                oldarray = result_array.concat()//深拷贝 数组
 
             }
             else {//没有新增内容
                 console.log("diff: 0")
             }
+
         }
+
     }
+    else {
+        console.log("it is null.")
+    }
+
     console.log('-----------------------------------');
+
 }
 
 
