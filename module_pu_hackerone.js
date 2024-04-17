@@ -49,10 +49,7 @@ async function crawl() {
     /*
     删除部分代码：
     由于新版本的hackerone网站(2024年) 已经不是懒加载了 所以不需要 滚动/向下翻页 了.
-
     */
-
-
 
 
 
@@ -130,14 +127,13 @@ async function crawl() {
                         severity: element[i].querySelector('span[data-testid="report-severity"]')?.innerText,
                         reward奖金: element[i].querySelector('span[data-testid="report-reward"]')?.innerText,
                         status: element[i].querySelector('div[data-testid="report-status"]')?.innerText,
-                        disclosedAt披露时间点: element[i].querySelector('div[data-testid="report-disclosed-at"]')?.innerText,
-                        link: element[i].querySelector('a[href^="/"]')?.href,
                         summary: element[i].querySelector('div[class="interactive-markdown text-sm w-full"]')?.innerText,
+                        link: element[i].querySelector('a[href^="/"]')?.href,
                     };
 
 
 
-                    let  one_item_title = element[i].querySelector('div[data-testid="report-title"]')?.innerText;
+                    // let  one_item_title = element[i].querySelector('div[data-testid="report-title"]')?.innerText;
                     // let one_item_severity = element[i].querySelector('span[data-testid="report-severity"]')?.innerText;
 
                     // let one_item_reward = element[i].querySelector('span[data-testid="report-reward"]')?.innerText;
@@ -151,9 +147,9 @@ async function crawl() {
                     // let one_item = [one_item_title, one_item_severity, one_item_reward, one_item_status, one_item_disclosedAt, one_item_reporter, one_item_summary];
                     // const oneItemString = one_item.join('\n\n\n');
 
-                    const oneItemString = JSON.stringify(one_item, null, 2);
+                    const oneItemString = JSON.stringify(one_item, null, 2) + '\n\n\n🔗 ' + one_item.link;
 
-                    tempArray1[i] = [one_item_title, oneItemString]
+                    tempArray1[i] = [one_item.title, oneItemString]
                     // element[i].innerText+'\n'+element[i].href;//取出某个元素 的innerText
 
                 }
