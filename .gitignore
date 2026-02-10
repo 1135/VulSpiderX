@@ -1,0 +1,14 @@
+# Dependencies
+node_modules/
+
+# Logs
+*.log
+
+# Lock files
+package-lock.json
+
+# Test files
+test.js
+
+# Local config
+module_mail.js
