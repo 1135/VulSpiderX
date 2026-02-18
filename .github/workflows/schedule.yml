@@ -1,0 +1,49 @@
+name: VulSpiderX Crawler
+
+on:
+  schedule:
+    # Run every 30 minutes
+    - cron: '*/30 * * * *'
+  workflow_dispatch: # Allow manual trigger
+
+jobs:
+  crawl:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Setup Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '16'
+        cache: 'npm'
+
+    - name: Install Dependencies
+      run: npm install
+
+    - name: Restore Data Cache
+      uses: actions/cache@v3
+      id: restore-data
+      with:
+        path: data.json
+        key: vulspiderx-data-${{ github.run_id }}
+        restore-keys: |
+          vulspiderx-data-
+
+    - name: Run Crawler
+      env:
+        MAIL_USER: ${{ secrets.MAIL_USER }}
+        MAIL_PASS: ${{ secrets.MAIL_PASS }}
+        MAIL_TO: ${{ secrets.MAIL_TO }}
+        SINGLE_RUN: true
+      run: node index.js
+      # Timeout to prevent hanging
+      timeout-minutes: 10
+
+    - name: Save Data Cache
+      if: always() # Save even if the run fails (though ideally only on success)
+      uses: actions/cache@v3
+      with:
+        path: data.json
+        key: vulspiderx-data-${{ github.run_id }}

@@ -1,6 +1,6 @@
 # VulSpiderX
 
-[english](README_english.md) | [中文文档](README.md)
+[english](README_english.md) | [中文文档](README.md) | [自动运行配置](GITHUB_ACTIONS.md)
 
 功能说明: 本程序在后台运行，每10到20分钟(随机)获取Hackerone的最新信息，如果有最新的漏洞，主动发送电子邮件(标题+链接)给若干个安全研究人员。
 

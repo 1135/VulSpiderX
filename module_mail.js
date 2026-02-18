@@ -1,17 +1,18 @@
 var nodemailer = require('nodemailer');
+const config = require('./config');
 
-var user = 'xxxx@aliyun.com';//发件 账号
-var pass = 'xxxx';//发件 密码
-var recipients = "1@sohu.com, 2@126.com";//收件地址 列表
+var user = config.mail.user;//发件 账号
+var pass = config.mail.pass;//发件 密码
+var recipients = config.mail.recipients;//收件地址 列表
 
 
-async function send_a_mail(title_of_mail, content_of_mail , one_pdf_file) {
+async function send_a_mail(title_of_mail, content_of_mail, one_pdf_file) {
 
     var transporter = nodemailer.createTransport({
-        host: "smtp.aliyun.com",
+        host: config.mail.host,
         //port: 25, // SMTP
-        port: 465, // SMTPS（SMTP-over-SSL）
-        secureConnection: true, // SSL
+        port: config.mail.port, // SMTPS（SMTP-over-SSL）
+        secureConnection: config.mail.secureConnection, // SSL
         auth: {
             user: user,
             pass: pass,
@@ -40,10 +41,10 @@ async function send_a_mail(title_of_mail, content_of_mail , one_pdf_file) {
         text: content_of_mail, // 内容
         //html: '<b>Hello world ?</b>' // html 内容
         attachments: [
-        //     {   // utf-8 string as an attachment
-        //         filename: 'text1.txt',
-        //         content: 'hello world!'
-        //     },
+            //     {   // utf-8 string as an attachment
+            //         filename: 'text1.txt',
+            //         content: 'hello world!'
+            //     },
 
             {   // binary buffer as an attachment
                 filename: title_of_mail + '.pdf',
@@ -61,22 +62,21 @@ async function send_a_mail(title_of_mail, content_of_mail , one_pdf_file) {
             // transporter.sendMail(mailOptions,callbackit)//重新发送
             // return console.log("[mail]fail!  retry..."+ mailOptions.subject + mailOptions.text)
         }
-       console.log('Message sent: ' + info.response);
+        console.log('Message sent: ' + info.response);
 
     }
 
-    if(one_pdf_file == -1 ){
+    if (one_pdf_file == -1) {
         //无需附件
         // send mail with defined transport object
         await transporter.sendMail(mailOptions, callbackit);
 
     }
-    else
-    {   //需要附件
+    else {   //需要附件
         // send mail with defined transport object
         await transporter.sendMail(mailOptions_with_attachment, callbackit);
     }
-    
+
 }
 
 

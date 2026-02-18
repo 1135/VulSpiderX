@@ -85,19 +85,19 @@ async function crawl() {
 
 
 
-    //-----提取内容
+        //-----提取内容
 
-    //在浏览器console调试
-    // 获取漏洞标题
-    // 筛选1 document.querySelectorAll('div.spec-hacktivity-content>a')[0].innerText
-    // 说明 因为未公开的漏洞标题 没有a标签 所以这个筛选只能找到不被隐藏的标题。  无法找到隐藏的标题
+        //在浏览器console调试
+        // 获取漏洞标题
+        // 筛选1 document.querySelectorAll('div.spec-hacktivity-content>a')[0].innerText
+        // 说明 因为未公开的漏洞标题 没有a标签 所以这个筛选只能找到不被隐藏的标题。  无法找到隐藏的标题
 
-    // 筛选2 document.querySelectorAll('div.spec-hacktivity-content')[16].outerText
-    // 如果 隐藏 不能被展示 爬到的内容为 "closed 2 hrs agoBy batee5a to InnoGames$300.00"
+        // 筛选2 document.querySelectorAll('div.spec-hacktivity-content')[16].outerText
+        // 如果 隐藏 不能被展示 爬到的内容为 "closed 2 hrs agoBy batee5a to InnoGames$300.00"
 
 
-    // 获取漏洞链接
-    // 筛选1 document.querySelectorAll('div.spec-hacktivity-content>a')[0].href
+        // 获取漏洞链接
+        // 筛选1 document.querySelectorAll('div.spec-hacktivity-content>a')[0].href
 
         let eleCount = await page1.evaluate((sel) => {
             // return document.querySelectorAll('div.spec-hacktivity-content>a').length; 
@@ -162,12 +162,16 @@ async function crawl() {
     }
     catch (err) {
         console.log(`An error occured.h1_[will_close_browser]`);
-        await browser.close(); //已经出现异常 那就关闭浏览器 等待下次爬
+        if (browser) {
+            await browser.close(); //已经出现异常 那就关闭浏览器 等待下次爬
+        }
         console.log(err);
 
     }
     finally {
-        await browser.close();
+        if (browser) {
+            await browser.close();
+        }
         return result;
     }
 
